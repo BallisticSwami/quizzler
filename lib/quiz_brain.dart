@@ -2,6 +2,7 @@ import 'question.dart';
 
 class QuizBrain {
   int _questionNumber = 0;
+  int _flag = 0;
 
   List<Question> _questionBank = [
     Question('Some cats are actually allergic to humans', true),
@@ -37,6 +38,12 @@ class QuizBrain {
     }
   }
 
+  void nextFlag() {
+    if (_questionNumber < _questionBank.length) {
+      _flag++;
+    }
+  }
+
   String getQuestionText() {
     return _questionBank[_questionNumber].questionText;
   }
@@ -45,9 +52,26 @@ class QuizBrain {
     return _questionBank[_questionNumber].questionAnswer;
   }
 
+  bool isFinished() {
+    if (_flag >= _questionBank.length) {
+      print('true');
+      return true;
+    } else {
+      print('false');
+      return false;
+    }
+  }
   //TODO: Step 3 Part A - Create a method called isFinished() here that checks to see if we have reached the last question. It should return (have an output) true if we've reached the last question and it should return false if we're not there yet.
 
   //TODO: Step 3 Part B - Use a print statement to check that isFinished is returning true when you are indeed at the end of the quiz and when a restart should happen.
 
+  void reset() {
+    _questionNumber = 0;
+    _flag = 0;
+  }
+
+  int totalQuestion() {
+    return _questionBank.length;
+  }
   //TODO: Step 4 Part B - Create a reset() method here that sets the questionNumber back to 0.
 }
